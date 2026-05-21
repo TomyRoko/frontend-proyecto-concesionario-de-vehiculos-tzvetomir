@@ -1,7 +1,7 @@
 function Header() {
   return (
     <header>
-      <h1>Concesionario de Vehículos</h1>
+      {/* <h1>Logo de la marca</h1> */}
     </header>
   );
 }
