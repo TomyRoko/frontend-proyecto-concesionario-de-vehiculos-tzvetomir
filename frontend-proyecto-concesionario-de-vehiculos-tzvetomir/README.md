@@ -18,4 +18,3 @@ Voy a realizar una web para la compra o para el renting de vehiculos de distinta
 ```shell
 npm install
 npm run dev
-```shell
