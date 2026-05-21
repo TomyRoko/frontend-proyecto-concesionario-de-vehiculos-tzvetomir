@@ -1,3 +1,4 @@
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 
 
@@ -13,9 +14,7 @@ function App() {
       <main>
       </main>
 
-      <footer>
-        <p>© 2024 Concesionario de Vehículos. Todos los derechos reservados.</p>
-      </footer>
+      <Footer />
     </>
   );
 }
