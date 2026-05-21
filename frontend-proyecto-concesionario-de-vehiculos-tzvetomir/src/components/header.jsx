@@ -1,4 +1,4 @@
-function header() {
+function Header() {
   return (
     <header>
       <h1>Concesionario de Vehículos</h1>
@@ -6,4 +6,4 @@ function header() {
   );
 }
 
-export default header;
+export default Header;
