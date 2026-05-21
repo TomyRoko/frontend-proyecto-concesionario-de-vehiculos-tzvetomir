@@ -1,9 +1,21 @@
+import Header from "./components/header";
+
+
 import "./App.css";
+
 
 function App() {
   return (
     <>
-      <h1>Proyecto Concesionario de Vehículos</h1>
+      <Header />
+      <nav></nav>
+
+      <main>
+      </main>
+
+      <footer>
+        <p>© 2024 Concesionario de Vehículos. Todos los derechos reservados.</p>
+      </footer>
     </>
   );
 }
