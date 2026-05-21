@@ -3,8 +3,8 @@ import Navbar from "./Navbar";
 function Header() {
   return (
     <header>
-      <div className="header-container">
-        <h1>Logo de la marca</h1>
+      <div className="header-content container">
+        <div>Logo de la marca</div>
         <Navbar />
       </div>
     </header>

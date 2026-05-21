@@ -15,8 +15,17 @@ a {
   color: inherit;
 }
 
+.container {
+  width: min(1100px, 90%);
+  margin: auto;
+}
+
 .header-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+}
+
+.header-content nav {
+  display: flex;
+  gap: 10px;
 }
