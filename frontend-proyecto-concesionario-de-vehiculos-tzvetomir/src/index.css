@@ -16,16 +16,20 @@ a {
 }
 
 .button {
+  display: inline-block;
   background-color: hsl(0, 0%, 11%);
   color: white;
   padding: 10px 20px;
   border: none;
-  cursor: pointer;
+  border-radius: 5px;
 }
 
-img {
-  width: 100%;
+.logo img {
+  position: relative;
+  left: -80px;
+  width: 200px;
 }
+
 .container {
   width: min(1100px, 90%);
   margin: auto;
@@ -38,18 +42,10 @@ img {
   align-items: center;
 }
 
-.header-content nav {
-  display: flex;
-  gap: 3em;
-  position: relative;
-  right: 350px;
+.header-position {
+  flex: 1;
 }
 
-.logo {
-  position: relative;
-  left: -180px;
-  width: 150px;
-}
 .site-header {
   background-color: hsl(0, 0%, 11%);
   padding: 30px;
