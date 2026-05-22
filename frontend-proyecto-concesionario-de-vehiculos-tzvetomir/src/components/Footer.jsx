@@ -1,7 +1,9 @@
 function Footer() {
   return (
-    <footer>
-      <p>&copy; 2024 Concesionario de Vehículos. Todos los derechos reservados.</p>
+    <footer className="site-footer">
+      <div className="container">
+        <p>&copy; 2024 Concesionario de Vehículos. Todos los derechos reservados.</p>
+      </div>
     </footer>
   );
 }   
