@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className="site-header">
       <div className="header-content container">
-        <div>Logo de la marca</div>
+        <div className="logo"><img src="./img/logo.png" alt="Logo de la marca" /></div>
         <Navbar />
       </div>
     </header>

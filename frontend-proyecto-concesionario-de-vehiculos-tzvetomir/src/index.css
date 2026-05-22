@@ -15,17 +15,49 @@ a {
   color: inherit;
 }
 
+.button {
+  background-color: hsl(0, 0%, 11%);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+}
 .container {
   width: min(1100px, 90%);
   margin: auto;
 }
 
 .header-content {
+  max-height: 5px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .header-content nav {
   display: flex;
-  gap: 10px;
+  gap: 3em;
+  position: relative;
+  right: 350px;
+}
+
+.logo {
+  position: relative;
+  left: -180px;
+  width: 150px;
+}
+.site-header {
+  background-color: hsl(0, 0%, 11%);
+  padding: 30px;
+}
+.hero-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2.5em;
+  margin-bottom: 20px;
 }

@@ -5,6 +5,12 @@ function Home() {
         <div className="container">
           <span className="hero-label">
             ¡Descubre tu próximo vehículo con nosotros!
+            <div>
+              {/* Se mostraran los mejores modelos del mercado, con ofertas exclusivas y financiamiento a tu medida. */}
+            </div>
+            <a className="button" href="#">
+              Ver catálogo
+            </a>
           </span>
           <h1>Bienvenido a nuestro concesionario de vehículos</h1>
           <p>
@@ -14,11 +20,12 @@ function Home() {
             que se adapte a tus necesidades y presupuesto. ¡Visítanos hoy mismo
             y comienza tu viaje hacia tu próximo vehículo!
           </p>
-          <a className="button" href="#">
-            Ver catálogo
-          </a>
         </div>
       </section>
+
+      <div style={{ width: "200px", margin: "20px auto" }}>
+        <img src="https://picsum.photos/600/600" />
+      </div>
     </main>
   );
 }
