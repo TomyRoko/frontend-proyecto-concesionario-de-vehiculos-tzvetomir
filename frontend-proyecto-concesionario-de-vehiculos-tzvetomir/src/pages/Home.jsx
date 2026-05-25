@@ -7,7 +7,7 @@ function Home() {
       <section className="hero-section">
         <div className="container">
           <span className="hero-label">
-            ¡Descubre tu próximo vehículo con nosotros!
+            <div className="hero-label-title">¡Descubre tu próximo vehículo con nosotros!</div>
             <VehiculosExclusivos vehiculos={vehiculos} />
           </span>
           <h1>Bienvenido a nuestro concesionario de vehículos</h1>
