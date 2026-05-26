@@ -22,11 +22,23 @@ function Catalogo() {
 
   const sortedVehicles = [...filteredVehicles].sort((a, b) => {
     if (sortBy === "az") {
-        if (a.marca < b.marca) return -1;
-        if (a.marca > b.marca) return 1;
-        return 0;
+      if (a.marca < b.marca) return -1;
+      if (a.marca > b.marca) return 1;
+      return 0;
+    }
+    if (sortBy === "za") {
+      if (a.marca > b.marca) return -1;
+      if (a.marca < b.marca) return 1;
+      return 0;
+    }
+    if (sortBy === "newest") {
+      return b.year - a.year;
     }
 
+    if (sortBy === "oldest") {
+      return a.year - b.year;
+    }
+  });
 
   const hasResults = filteredVehicles.length > 0;
 
@@ -63,16 +75,20 @@ function Catalogo() {
           </option>
         ))}
       </select>
-      <select
-        value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
-      >
+      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
         <option value="">Ordenar por</option>
         <option value="marca">Marca</option>
         <option value="modelo">Modelo</option>
       </select>
+      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <option value="">Ordenar por</option>
+        <option value="az">Marca A-Z</option>
+        <option value="za">Marca Z-A</option>
+        <option value="newest">Más nuevo</option>
+        <option value="oldest">Más antiguo</option>
+      </select>
       {hasResults ? (
-        <VehiculosList vehiculos={filteredVehicles} />
+        <VehiculosList vehiculos={sortedVehicles} />
       ) : (
         <p>No se encontraron resultados.</p>
       )}
