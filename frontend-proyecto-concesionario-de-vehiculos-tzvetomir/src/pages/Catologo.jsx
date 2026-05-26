@@ -20,6 +20,14 @@ function Catalogo() {
     return matchSearch && matchCombustible;
   });
 
+  const sortedVehicles = [...filteredVehicles].sort((a, b) => {
+    if (sortBy === "az") {
+        if (a.marca < b.marca) return -1;
+        if (a.marca > b.marca) return 1;
+        return 0;
+    }
+
+
   const hasResults = filteredVehicles.length > 0;
 
   const combustible = [
