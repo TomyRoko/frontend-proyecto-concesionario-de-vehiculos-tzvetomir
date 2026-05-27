@@ -1,13 +1,13 @@
-import MovieCard from "./MovieCard";
+import VehiculoCard from "./VehiculoCard.jsx";
 
 function VehiculosList({ vehiculos }) {
   return (
     <div className="vehiculos-list">
       {vehiculos.map((vehiculo) => (
-        <MovieCard key={vehiculo.id} movie={vehiculo} />
+        <VehiculoCard key={vehiculo.id} vehiculo={vehiculo} />
       ))}
     </div>
   );
 }
 
-export default VehiculosList
+export default VehiculosList;

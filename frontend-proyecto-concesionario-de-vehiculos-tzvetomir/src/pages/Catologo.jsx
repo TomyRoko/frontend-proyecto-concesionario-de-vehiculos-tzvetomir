@@ -1,8 +1,6 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
 import { useState } from "react";
 import vehiculos from "../data/vehiculos.js";
-import "./App.css";
+import "../App.css";
 import VehiculosList from "../components/VehiculosList.jsx";
 
 function Catalogo() {
@@ -48,52 +46,45 @@ function Catalogo() {
 
   return (
     <>
-      <Header />
-
-      <h1>Catálogo de Vehículos</h1>
-      <p>
-        Aquí encontrarás una amplia selección de vehículos disponibles en
-        nuestro concesionario. Explora nuestras opciones y encuentra el
-        automóvil perfecto para ti.
-      </p>
-      <label htmlFor="search">Buscar por marca o modelo:</label>
-      <input
-        type="text"
-        name="search"
-        id="search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <select
-        value={combustibleFilter}
-        onChange={(e) => setCombustibleFilter(e.target.value)}
-      >
-        <option value="">Todos</option>
-        {combustible.map((tipo) => (
-          <option key={tipo} value={tipo}>
-            {tipo}
-          </option>
-        ))}
-      </select>
-      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-        <option value="">Ordenar por</option>
-        <option value="marca">Marca</option>
-        <option value="modelo">Modelo</option>
-      </select>
-      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-        <option value="">Ordenar por</option>
-        <option value="az">Marca A-Z</option>
-        <option value="za">Marca Z-A</option>
-        <option value="newest">Más nuevo</option>
-        <option value="oldest">Más antiguo</option>
-      </select>
-      {hasResults ? (
-        <VehiculosList vehiculos={sortedVehicles} />
-      ) : (
-        <p>No se encontraron resultados.</p>
-      )}
-
-      <Footer />
+      <main>
+        <h1>Catálogo de Vehículos</h1>
+        <p>
+          Aquí encontrarás una amplia selección de vehículos disponibles en
+          nuestro concesionario. Explora nuestras opciones y encuentra el
+          automóvil perfecto para ti.
+        </p>
+        <label htmlFor="search">Buscar por marca o modelo:</label>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <select
+          value={combustibleFilter}
+          onChange={(e) => setCombustibleFilter(e.target.value)}
+        >
+          <option value="">Todos</option>
+          {combustible.map((tipo) => (
+            <option key={tipo} value={tipo}>
+              {tipo}
+            </option>
+          ))}
+        </select>
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="">Ordenar por</option>
+          <option value="az">Marca A-Z</option>
+          <option value="za">Marca Z-A</option>
+          <option value="newest">Más nuevo</option>
+          <option value="oldest">Más antiguo</option>
+        </select>
+        {hasResults ? (
+          <VehiculosList vehiculos={sortedVehicles} />
+        ) : (
+          <p>No se encontraron resultados.</p>
+        )}
+      </main>
     </>
   );
 }
