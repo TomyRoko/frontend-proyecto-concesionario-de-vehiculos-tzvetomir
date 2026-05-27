@@ -85,6 +85,7 @@ span.hero-label {
 .vehiculo-card img {
   width: 100%;
   height: auto;
+  display: block;
 }
 
 .vehiculo-card-content {
@@ -102,4 +103,16 @@ span.hero-label {
 
 .vehiculo-info {
   padding: 16px;
+}
+
+.vehiculos-catalogo {
+  width: 100%;
+  padding: 20px;
+}
+
+.vehiculos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  align-items: start;
 }

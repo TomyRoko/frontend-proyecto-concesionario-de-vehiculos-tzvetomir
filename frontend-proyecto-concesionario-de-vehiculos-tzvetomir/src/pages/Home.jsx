@@ -1,16 +1,25 @@
 import VehiculosExclusivos from "../components/VehiculosExclusivos.jsx";
 import vehiculos from "../data/vehiculos.js";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <main>
       <section className="hero-section">
         <div className="container">
           <span className="hero-label">
-            
             <VehiculosExclusivos vehiculos={vehiculos} />
-            <div className="hero-label-title">¡Descubre tu próximo vehículo con nosotros!</div>
-            <button className="hero-button" onClick={() => window.location.href = '/catalogo'}>Explorar catálogo</button>
+            <div className="hero-label-title">
+              ¡Descubre tu próximo vehículo con nosotros!
+            </div>
+            <button
+              type="button"
+              className="hero-button"
+              onClick={() => navigate("/catalogo")}
+            >
+              Explorar catálogo
+            </button>
           </span>
           <h1>Bienvenido a nuestro concesionario de vehículos</h1>
           <p>

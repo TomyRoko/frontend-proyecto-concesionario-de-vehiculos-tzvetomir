@@ -1,6 +1,6 @@
 import { useState } from "react";
 import vehiculos from "../data/vehiculos.js";
-import "../App.css";
+import "../index.css";
 import VehiculosList from "../components/VehiculosList.jsx";
 
 function Catalogo() {
@@ -30,11 +30,11 @@ function Catalogo() {
       return 0;
     }
     if (sortBy === "newest") {
-      return b.year - a.year;
+      return b.anio - a.anio;
     }
 
     if (sortBy === "oldest") {
-      return a.year - b.year;
+      return a.anio - b.anio;
     }
   });
 
@@ -79,11 +79,13 @@ function Catalogo() {
           <option value="newest">Más nuevo</option>
           <option value="oldest">Más antiguo</option>
         </select>
+        <div className="vehiculos-catalogo">
         {hasResults ? (
           <VehiculosList vehiculos={sortedVehicles} />
         ) : (
           <p>No se encontraron resultados.</p>
         )}
+        </div>
       </main>
     </>
   );
