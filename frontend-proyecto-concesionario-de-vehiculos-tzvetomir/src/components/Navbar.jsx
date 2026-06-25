@@ -10,6 +10,7 @@ function Navbar() {
       <Link to="/Suv">Suv</Link>
       <Link to="/Deportivo">Deportivo</Link>
       <Link to="/Electrico">Eléctrico</Link>
+      <Link to="/admin">Admin</Link>
     </nav>
   );
 }

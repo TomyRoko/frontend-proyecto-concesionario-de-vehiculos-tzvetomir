@@ -22,9 +22,9 @@ function VehiculoDetail() {
     <div className="vehiculo-detail">
       <img src={vehiculo.foto} alt={vehiculo.modelo} />
       <div className="vehiculo-info">
-        <h2>
+        <h1 >
           {vehiculo.marca} {vehiculo.modelo}
-        </h2>
+        </h1>
         <p>Año: {vehiculo.anio}</p>
         <p>Precio: ${vehiculo.precio}</p>
         <p>Combustible: {vehiculo.combustible}</p>
