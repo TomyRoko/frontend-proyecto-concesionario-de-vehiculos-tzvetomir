@@ -1,5 +1,10 @@
 import Navbar from "./Navbar";
 import logo from "../assets/logo.png";
+import SearchBox from "./SearchBox";
+import vehiculos from "../data/vehiculos.js";
+
+
+
 
 function Header() {
   return (
@@ -9,7 +14,7 @@ function Header() {
           <img src={logo} alt="Logo de la marca" />
         </div>
         <Navbar />
-        <span className="header-position"></span>
+        <SearchBox vehiculos={vehiculos} />
       </div>
     </header>
   );
