@@ -1,20 +1,22 @@
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import logo from "../assets/logo.png";
 import SearchBox from "./SearchBox";
 import vehiculos from "../data/vehiculos.js";
 
-
-
-
 function Header() {
   return (
     <header className="site-header">
       <div className="header-content container">
-        <div className="logo header-position">
-          <img src={logo} alt="Logo de la marca" />
+        <div className="logo">
+          <Link to="/" >
+            <img src={logo} alt="Logo de la marca" />
+          </Link>
         </div>
         <Navbar />
-        <SearchBox vehiculos={vehiculos} />
+        <div className="header-search">
+          <SearchBox vehiculos={vehiculos} />
+        </div>
       </div>
     </header>
   );

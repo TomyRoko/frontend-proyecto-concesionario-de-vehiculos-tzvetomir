@@ -1,5 +1,5 @@
 import VehiculosExclusivos from "../components/VehiculosExclusivos.jsx";
-import vehiculos from "../data/vehiculos.js";
+import  vehiculos  from "../data/vehiculos.js";
 import { useNavigate } from "react-router-dom";
 
 function Home() {

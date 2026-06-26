@@ -1,72 +1,187 @@
 import { useState } from "react";
 
 const initialFormState = {
-    categoria: "",
-    marca: "",
-    modelo: "",
-    descripcion: "",
-    anio: "",
-    kilometraje: "",
-    precio: "",
-    combustible: "",
-    foto: ""
+  categoria: "",
+  marca: "",
+  modelo: "",
+  descripcion: "",
+  anio: "",
+  kilometraje: "",
+  precio: "",
+  combustible: "",
+  foto: "",
 };
 
-function VehiculoForm() {
+function VehiculoForm({ onCreateVehiculo }) {
+  const [form, setForm] = useState(initialFormState);
 
-    const [ form , setForm ] = useState(initialFormState);
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    setForm({
+      ...form,
+      [name]: type == "checkbox" ? checked : value,
+    });
+  };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setForm({
-            ...form,
-            [name]: value
-        });
-    };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!form.categoria.trim()) {
+      alert("Por favor, Seleccione una categoría.");
+      return;
+    }
+    if (!form.marca.trim()) {
+      alert("Por favor, Ingrese una marca.");
+      return;
+    }
+    if (!form.modelo.trim()) {
+      alert("Por favor, Ingrese un modelo.");
+      return;
+    }
+    if (!form.anio.trim()) {
+      alert("Por favor, Ingrese un año.");
+      return;
+    }
+    if (!form.kilometraje.trim()) {
+      alert("Por favor, Ingrese un kilometraje.");
+      return;
+    }
+    if (!form.precio.trim()) {
+      alert("Por favor, Ingrese un precio.");
+      return;
+    }
+    if (!form.combustible.trim()) {
+      alert("Por favor, Seleccione un tipo de combustible.");
+      return;
+    }
+    if (!form.foto.trim()) {
+      alert("Por favor, Ingrese una URL de foto.");
+      return;
+    }
+    onCreateVehiculo(form);
+    setForm(initialFormState);
+  };
 
-    return (
-        <form className="vehiculo-form">
-            <h2>Agregar nuevo vehículo</h2>
-            <div className="form-group">
-                <label htmlFor="categoria">Categoría:</label>
-                <input type="text" placeholder="Ingrese la categoría" id="categoria" name="categoria" onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="marca">Marca:</label>
-                <input type="text" placeholder="Ingrese la marca" id="marca" name="marca" onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="modelo">Modelo:</label>
-                <input type="text" placeholder="Ingrese el modelo" id="modelo" name="modelo" onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="descripcion">Descripción:</label>
-                <input type="text" placeholder="Ingrese la descripción" id="descripcion" name="descripcion" onChange={handleChange}/>
-            </div>
-            <div className="form-group">
-                <label htmlFor="anio">Año:</label>
-                <input type="number" placeholder="Ingrese el año" id="anio" name="anio" onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="kilometraje">Kilometraje:</label>
-                <input type="number" placeholder="Ingrese el kilometraje" id="kilometraje" name="kilometraje" onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="precio">Precio:</label>
-                <input type="number" placeholder="Ingrese el precio" id="precio" name="precio" onChange={handleChange} required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="combustible">Combustible:</label>
-                <input type="text" placeholder="Ingrese el tipo de combustible" id="combustible" name="combustible" onChange={handleChange} required />
-            </div>
-            {form.foto.trim() && (
-                <div className="form-group">
-                    <img src={form.foto} alt="Vista previa del vehículo" className="vehiculo-preview" />
-                </div>
-            )}
-            <button type="submit">Agregar vehículo</button>
-        </form>
-    )
+  return (
+    <form className="vehiculo-form" onSubmit={handleSubmit}>
+      <h2>Agregar nuevo vehículo</h2>
+      <div className="form-group">
+        <label htmlFor="categoria">Categoría:</label>
+        <select
+          id="categoria"
+          name="categoria"
+          value={form.categoria}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Seleccione una categoría</option>
+          <option value="Sedán">Sedán</option>
+          <option value="SUV">SUV</option>
+          <option value="Camioneta">Camioneta</option>
+          <option value="Deportivo">Deportivo</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="marca">Marca:</label>
+        <input
+          type="text"
+          placeholder="Ingrese la marca"
+          id="marca"
+          name="marca"
+          value={form.marca}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="modelo">Modelo:</label>
+        <input
+          type="text"
+          placeholder="Ingrese el modelo"
+          id="modelo"
+          name="modelo"
+          value={form.modelo}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="descripcion">Descripción:</label>
+        <input
+          type="text"
+          placeholder="Ingrese la descripción"
+          id="descripcion"
+          name="descripcion"
+          value={form.descripcion}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="anio">Año:</label>
+        <input
+          type="number"
+          placeholder="Ingrese el año"
+          id="anio"
+          name="anio"
+          value={form.anio}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="kilometraje">Kilometraje:</label>
+        <input
+          type="number"
+          placeholder="Ingrese el kilometraje"
+          id="kilometraje"
+          name="kilometraje"
+          value={form.kilometraje}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="precio">Precio:</label>
+        <input
+          type="number"
+          placeholder="Ingrese el precio"
+          id="precio"
+          name="precio"
+          value={form.precio}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="combustible">Combustible:</label>
+        <select
+          id="combustible"
+          name="combustible"
+          value={form.combustible}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Seleccione un tipo de combustible</option>
+          <option value="Gasolina">Gasolina</option>
+          <option value="Diésel">Diésel</option>
+          <option value="Eléctrico">Eléctrico</option>
+          <option value="Híbrido">Híbrido</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="foto">Foto:</label>
+        <input
+          type="text"
+          id="foto"
+          name="foto"
+          value={form.foto}
+          onChange={handleChange}
+          placeholder="HTTPS://"
+          required
+        />
+      </div>
+      <button type="submit">Agregar vehículo</button>
+    </form>
+  );
 }
 
-export default VehiculoForm
+export default VehiculoForm;

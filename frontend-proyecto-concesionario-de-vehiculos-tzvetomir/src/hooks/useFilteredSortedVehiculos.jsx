@@ -1,4 +1,10 @@
-function useFilteredSortedVehiculos(vehiculos, search, combustibleFilter, sortBy) {
+function useFilteredSortedVehiculos(
+  vehiculos,
+  search,
+  combustibleFilter,
+  sortBy,
+  categoriaFilter = ""
+) {
   const filteredVehicles = vehiculos.filter((vehicle) => {
     const matchSearch =
       vehicle.marca.toLowerCase().includes(search.toLowerCase()) ||
@@ -6,7 +12,10 @@ function useFilteredSortedVehiculos(vehiculos, search, combustibleFilter, sortBy
     const matchCombustible = combustibleFilter
       ? vehicle.combustible === combustibleFilter
       : true;
-    return matchSearch && matchCombustible;
+    const matchCategoria = categoriaFilter
+      ? vehicle.categoria === categoriaFilter
+      : true;
+    return matchSearch && matchCombustible && matchCategoria;
   });
   const sortedVehicles = [...filteredVehicles].sort((a, b) => {
     if (sortBy === "az") {

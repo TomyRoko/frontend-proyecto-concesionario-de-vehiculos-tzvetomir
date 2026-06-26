@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import vehiculos from "../data/vehiculos.js";
 import "../index.css";
 import VehiculosList from "../components/VehiculosList.jsx";
@@ -10,12 +11,15 @@ function Catalogo() {
   const [search, setSearch] = useState("");
   const [combustibleFilter, setCombustibleFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [searchParams] = useSearchParams();
+  const categoriaFilter = searchParams.get("categoria") || "";
 
   const { filteredVehicles, sortedVehicles } = useFilteredSortedVehiculos(
     vehiculos,
     search,
     combustibleFilter,
-    sortBy
+    sortBy,
+    categoriaFilter
   );
 
   const hasResults = filteredVehicles.length > 0;

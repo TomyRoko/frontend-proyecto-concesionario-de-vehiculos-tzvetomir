@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 
-
 function Navbar() {
   return (
-    <nav className="header-position" style={{ display: "flex", gap: "20px" }}>
+    <nav className="header-nav">
       <Link to="/">Inicio</Link>
-      <Link to="/Berlina">Berlina</Link>
-      <Link to="/Coupe">Coupe</Link>
-      <Link to="/Suv">Suv</Link>
-      <Link to="/Deportivo">Deportivo</Link>
-      <Link to="/Electrico">Eléctrico</Link>
+      <Link to="/catalogo?categoria=Berlina">Berlina</Link>
+      <Link to="/catalogo?categoria=Coupe">Coupe</Link>
+      <Link to="/catalogo?categoria=Suv">SUV</Link>
+      <Link to="/catalogo?categoria=Deportivo">Deportivo</Link>
+      <Link to="/catalogo?categoria=Electrico">Electrico</Link>
       <Link to="/admin">Admin</Link>
     </nav>
   );

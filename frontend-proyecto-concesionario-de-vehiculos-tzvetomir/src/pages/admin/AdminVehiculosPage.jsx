@@ -1,9 +1,19 @@
-import vehiculos from "../../data/vehiculos.js";
+import initialProducts from "../../data/vehiculos.js";
 import { useState } from "react";
 import VehiculoForm from "../../components/VehiculoForm.jsx";
 
 function AdminVehiculosPage() {
   const [showForm, setShowForm] = useState(false);
+  const [vehiculos, setVehiculos] = useState(initialProducts);
+
+  const handleCreateVehiculo = (vehiculoData) => {
+    const newVehiculo = {
+      ...vehiculoData,
+      id: Date.now(), 
+    };
+    setVehiculos([...vehiculos, newVehiculo]);
+  }
+
   return (
     <section className="admin-vehiculos-page">
       <div className="admin-vehiculos-header">
@@ -19,7 +29,7 @@ function AdminVehiculosPage() {
           {showForm ? "Cerrar formulario" : "Agregar nuevo vehículo"}
         </button>
       </div>
-      {showForm && <VehiculoForm />}
+      {showForm && <VehiculoForm onCreateVehiculo={handleCreateVehiculo} />}
       <div className="admin-vehiculos-list">
         {vehiculos.map((vehiculo) => (
           <article key={vehiculo.id}>
