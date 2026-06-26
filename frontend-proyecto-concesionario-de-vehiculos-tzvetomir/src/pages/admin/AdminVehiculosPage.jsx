@@ -1,8 +1,9 @@
 import vehiculos from "../../data/vehiculos.js";
-
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import VehiculoForm from "../../components/VehiculoForm.jsx";
 
 function AdminVehiculosPage() {
+  const [showForm, setShowForm] = useState(false);
   return (
     <section className="admin-vehiculos-page">
       <div className="admin-vehiculos-header">
@@ -10,9 +11,15 @@ function AdminVehiculosPage() {
           <h2>Administración de Vehículos</h2>
           <p>Listado de vehículos</p>
         </div>
-      </div>
 
-      <Link to="#">Agregar nuevo vehículo</Link>
+        <button
+          className="admin-vehiculos-add-button"
+          onClick={() => setShowForm(!showForm)}
+        >
+          {showForm ? "Cerrar formulario" : "Agregar nuevo vehículo"}
+        </button>
+      </div>
+      {showForm && <VehiculoForm />}
       <div className="admin-vehiculos-list">
         {vehiculos.map((vehiculo) => (
           <article key={vehiculo.id}>
