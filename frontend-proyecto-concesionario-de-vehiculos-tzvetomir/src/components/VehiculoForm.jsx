@@ -59,10 +59,11 @@ function VehiculoForm() {
                 <label htmlFor="combustible">Combustible:</label>
                 <input type="text" placeholder="Ingrese el tipo de combustible" id="combustible" name="combustible" onChange={handleChange} required />
             </div>
-            <div className="form-group">
-                <label htmlFor="foto">Foto (URL):</label>
-                <input type="text" placeholder="Ingrese la URL de la foto" id="foto" name="foto" onChange={handleChange} required />
-            </div>
+            {form.foto.trim() && (
+                <div className="form-group">
+                    <img src={form.foto} alt="Vista previa del vehículo" className="vehiculo-preview" />
+                </div>
+            )}
             <button type="submit">Agregar vehículo</button>
         </form>
     )
