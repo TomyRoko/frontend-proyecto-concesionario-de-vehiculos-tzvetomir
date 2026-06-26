@@ -25,7 +25,9 @@ function VehiculoDetail() {
         <h1 >
           {vehiculo.marca} {vehiculo.modelo}
         </h1>
+        <p>Categoría: {vehiculo.categoria}</p>
         <p>Año: {vehiculo.anio}</p>
+        <p>Kilometraje: {vehiculo.kilometraje} km</p>
         <p>Precio: ${vehiculo.precio}</p>
         <p>Combustible: {vehiculo.combustible}</p>
         <p>{vehiculo?.descripcion}</p>

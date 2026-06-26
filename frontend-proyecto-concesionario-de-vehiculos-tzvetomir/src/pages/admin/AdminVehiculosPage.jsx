@@ -38,9 +38,12 @@ function AdminVehiculosPage() {
               <h3>
                 {vehiculo.marca} {vehiculo.modelo}
               </h3>
+              <p>Categoría: {vehiculo.categoria}</p>
               <p>Año: {vehiculo.anio}</p>
+              <p>Kilometraje: {vehiculo.kilometraje} km</p>
               <p>Precio: ${vehiculo.precio}</p>
               <p>Combustible: {vehiculo.combustible}</p>
+              <p>Descripción: {vehiculo.descripcion}</p>
             </div>
           </article>
         ))}
