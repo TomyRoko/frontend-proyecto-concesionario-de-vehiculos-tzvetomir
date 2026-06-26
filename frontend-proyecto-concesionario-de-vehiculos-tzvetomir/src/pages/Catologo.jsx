@@ -6,7 +6,6 @@ import VehiculosList from "../components/VehiculosList.jsx";
 import VehiculoFilters from "../components/VehiculoFilters.jsx";
 import useFilteredSortedVehiculos from "../hooks/useFilteredSortedVehiculos.jsx";
 
-
 function Catalogo() {
   const [search, setSearch] = useState("");
   const [combustibleFilter, setCombustibleFilter] = useState("");
@@ -19,7 +18,7 @@ function Catalogo() {
     search,
     combustibleFilter,
     sortBy,
-    categoriaFilter
+    categoriaFilter,
   );
 
   const hasResults = filteredVehicles.length > 0;
@@ -30,7 +29,7 @@ function Catalogo() {
 
   return (
     <>
-      <main>
+      <main className="catalogo-page">
         <h1>Catálogo de Vehículos</h1>
         <p>
           Aquí encontrarás una amplia selección de vehículos disponibles en
@@ -38,15 +37,15 @@ function Catalogo() {
           automóvil perfecto para ti.
         </p>
 
-      <VehiculoFilters
-        search={search}
-        setSearch={setSearch}
-        combustibleFilter={combustibleFilter}
-        setCombustibleFilter={setCombustibleFilter}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        combustible={combustible}
-      />
+        <VehiculoFilters
+          search={search}
+          setSearch={setSearch}
+          combustibleFilter={combustibleFilter}
+          setCombustibleFilter={setCombustibleFilter}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          combustible={combustible}
+        />
         <div className="vehiculos-catalogo">
           {hasResults ? (
             <VehiculosList vehiculos={sortedVehicles} />
