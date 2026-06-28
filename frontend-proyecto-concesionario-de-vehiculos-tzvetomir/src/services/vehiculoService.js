@@ -5,8 +5,7 @@ const getVehiculos = async () => {
 
   if (!response.ok) {
     const errorData = await response.json();
-    const errorMessage = errorData.message || "Error al obtener los vehículos";
-    throw new Error(errorMessage);
+    throw new Error(errorData.message || "Error al obtener los vehículos");
   }
 
   const data = await response.json();
@@ -16,7 +15,8 @@ const getVehiculos = async () => {
 const getVehiculoById = async (id) => {
   const response = await fetch(`${API_URL}/${id}`);
     if (!response.ok) {
-    throw new Error("Error al obtener el vehículo");
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Error al obtener el vehículo");
   }
   const data = await response.json();
   return data;

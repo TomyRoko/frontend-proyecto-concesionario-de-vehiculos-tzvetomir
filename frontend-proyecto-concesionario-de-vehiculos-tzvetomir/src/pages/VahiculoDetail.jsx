@@ -34,7 +34,7 @@ function VehiculoDetail() {
   if (!vehiculo) {
     return (
       <main className="vehiculo-detail">
-        <h2>Vehículo no encontrado</h2>
+        <h2>{error || "Vehículo no encontrado"}</h2>
         <p>Lo sentimos, el vehículo que buscas no existe.</p>
         <Link to="/catalogo" className="back-link">
           Volver al catálogo
