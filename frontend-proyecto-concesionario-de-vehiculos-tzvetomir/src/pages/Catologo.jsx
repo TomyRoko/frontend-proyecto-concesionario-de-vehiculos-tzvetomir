@@ -1,17 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import vehiculos from "../data/vehiculos.js";
+import { getVehiculos } from "../services/vehiculoService.js";
 import "../index.css";
 import VehiculosList from "../components/VehiculosList.jsx";
 import VehiculoFilters from "../components/VehiculoFilters.jsx";
 import useFilteredSortedVehiculos from "../hooks/useFilteredSortedVehiculos.jsx";
 
 function Catalogo() {
+  const [vehiculos, setVehiculos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const [search, setSearch] = useState("");
   const [combustibleFilter, setCombustibleFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [searchParams] = useSearchParams();
   const categoriaFilter = searchParams.get("categoria") || "";
+
+  useEffect(() => {
+    const loadVehiculos = async () => {
+      try {
+        const data = await getVehiculos();
+        setVehiculos(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadVehiculos();
+  }, []);
 
   const { filteredVehicles, sortedVehicles } = useFilteredSortedVehiculos(
     vehiculos,
@@ -26,6 +44,15 @@ function Catalogo() {
   const combustible = [
     ...new Set(vehiculos.map((vehicle) => vehicle.combustible)),
   ];
+
+  if (loading) {
+    return <p className="loading">Cargando vehículos...</p>;
+  }
+
+  if (error) {
+    return <p className="error">Error: {error}</p>;
+  }
+
 
   return (
     <>
