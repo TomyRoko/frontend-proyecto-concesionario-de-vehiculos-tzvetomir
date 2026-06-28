@@ -4,7 +4,7 @@ function VehiculosList({ vehiculos }) {
   return (
     <div className="vehiculos-list">
       {vehiculos.map((vehiculo) => (
-        <VehiculoCard key={vehiculo.id} vehiculo={vehiculo} />
+        <VehiculoCard key={vehiculo._id} vehiculo={vehiculo} />
       ))}
     </div>
   );

@@ -1,10 +1,35 @@
 import { useParams } from "react-router-dom";
-import vehiculos from "../data/vehiculos.js";
 import { Link } from "react-router-dom";
+import { getVehiculoById } from "../services/vehiculoService.js";
+import { useState, useEffect } from "react";
 
 function VehiculoDetail() {
   const { id } = useParams();
-  const vehiculo = vehiculos.find((v) => v.id == id);
+  const [vehiculo , setVehiculo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadVehiculo = async () => {
+      try {
+        const data = await getVehiculoById(id);
+        setVehiculo(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadVehiculo();
+  }, [id]);
+
+  if (loading) {
+    return <p className="loading">Cargando vehículo...</p>;
+  }
+
+  if (error) {
+    return <p className="error">{error}</p>;
+  }
 
   if (!vehiculo) {
     return (
