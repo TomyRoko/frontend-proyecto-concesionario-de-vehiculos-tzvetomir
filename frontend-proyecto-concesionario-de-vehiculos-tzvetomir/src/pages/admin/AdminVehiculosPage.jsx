@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import VehiculoForm from "../../components/VehiculoForm.jsx";
 import { getVehiculos } from "../../services/vehiculoService.js";
-
+import { createVehiculo } from "../../services/vehiculoService.js";
+import { updateVehiculo } from "../../services/vehiculoService.js";
 
 function AdminVehiculosPage() {
   const [showForm, setShowForm] = useState(false);
@@ -34,12 +35,11 @@ function AdminVehiculosPage() {
     return <p className="error">{error}</p>;
   }
 
-  const handleCreateVehiculo = (vehiculoData) => {
-    const newVehiculo = {
-      ...vehiculoData,
-      id: Date.now(),
-    };
+  const handleCreateVehiculo = async (vehiculoData) => {
+    const newVehiculo = await createVehiculo(vehiculoData);
+
     setVehiculos([...vehiculos, newVehiculo]);
+    setShowForm(false);
     setMessage("Vehículo agregado correctamente.");
   };
 
@@ -50,10 +50,10 @@ function AdminVehiculosPage() {
     setVehiculoDelete(null);
   };
 
-  const handleUpdateVehiculo = (vehiculoID, vehiculoData) => {
+  const handleUpdateVehiculo = async (vehiculoID, vehiculoData) => {
+    const updatedVehiculo = await updateVehiculo(vehiculoID, vehiculoData);
     const updatedVehiculos = vehiculos.map((vehiculo) => {
       if (vehiculo.id == vehiculoID) {
-        const updatedVehiculo = { ...vehiculo, ...vehiculoData };
         return updatedVehiculo;
       }
       return vehiculo;
