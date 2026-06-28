@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { register } from "../services/authSevices.js";
 
 const initialForm = {
@@ -134,6 +135,11 @@ function RegisterPage() {
               Registrarse
             </button>
           </form>
+
+          <div className="register-login-redirect">
+            <span>Si ya tienes cuenta,</span>
+            <Link to="/auth/login">inicia sesión</Link>
+          </div>
         </div>
       </section>
     </main>

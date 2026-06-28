@@ -32,13 +32,19 @@ export const router = createBrowserRouter([
         path: "*",
         element: <NotFoundPage />,
       },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <MainLayout />,
+    children: [
       {
-        path: "/register",
-        element: <RegisterPage />,
+        path: "login",
+        element: <LoginPage />,
       },
       {
-        path: "/login",
-        element: <LoginPage />,
+        path: "register",
+        element: <RegisterPage />,
       },
     ],
   },

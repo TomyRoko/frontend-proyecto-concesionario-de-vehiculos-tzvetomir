@@ -9,7 +9,6 @@ function Navbar() {
       <Link to="/catalogo?categoria=Suv">SUV</Link>
       <Link to="/catalogo?categoria=Deportivo">Deportivo</Link>
       <Link to="/catalogo?categoria=Electrico">Electrico</Link>
-      <Link to="/admin">Admin</Link>
     </nav>
   );
 }
