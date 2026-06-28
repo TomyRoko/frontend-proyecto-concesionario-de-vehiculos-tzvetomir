@@ -61,7 +61,7 @@ function VehiculoForm({ onCreateVehiculo, onUpdateVehiculo, vehiculo }) {
       return;
     }
     if (isEditing) {
-      onUpdateVehiculo(vehiculo.id, form);
+      onUpdateVehiculo(vehiculo._id, form);
     } else {
       onCreateVehiculo(form);
     }

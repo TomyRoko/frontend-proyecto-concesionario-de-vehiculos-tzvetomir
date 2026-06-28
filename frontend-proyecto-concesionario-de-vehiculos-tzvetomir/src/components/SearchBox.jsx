@@ -30,7 +30,7 @@ function SearchBox({ vehiculos }) {
             <Link
               onclick={() => setSearch("")}
               className="search-button"
-              to={`/catalogo/${vehiculo.id}`}
+              to={`/catalogo/${vehiculo._id}`}
             >
               <strong>
                 {vehiculo.marca} {vehiculo.modelo}

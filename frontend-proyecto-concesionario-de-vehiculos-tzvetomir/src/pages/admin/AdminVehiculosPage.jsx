@@ -44,7 +44,7 @@ function AdminVehiculosPage() {
   };
 
   const handleDeleteVehiculo = (id) => {
-    const filteredVehiculos = vehiculos.filter((vehiculo) => vehiculo.id != id);
+    const filteredVehiculos = vehiculos.filter((vehiculo) => vehiculo._id != id);
     setVehiculos(filteredVehiculos);
     setMessage("Vehículo eliminado correctamente.");
     setVehiculoDelete(null);
@@ -53,7 +53,7 @@ function AdminVehiculosPage() {
   const handleUpdateVehiculo = async (vehiculoID, vehiculoData) => {
     const updatedVehiculo = await updateVehiculo(vehiculoID, vehiculoData);
     const updatedVehiculos = vehiculos.map((vehiculo) => {
-      if (vehiculo.id == vehiculoID) {
+      if (vehiculo._id == vehiculoID) {
         return updatedVehiculo;
       }
       return vehiculo;
@@ -87,7 +87,7 @@ function AdminVehiculosPage() {
 
       <div className="admin-vehiculos-list">
         {vehiculos.map((vehiculo) => (
-          <article key={vehiculo.id}>
+          <article key={vehiculo._id}>
             <img src={vehiculo.foto} alt={vehiculo.marca} />
             <div className="admin-vehiculos-info">
               <h3>
@@ -114,7 +114,7 @@ function AdminVehiculosPage() {
                 <button
                   type="button"
                   className="admin-vehiculos-delete-button"
-                  onClick={() => setVehiculoDelete(vehiculo.id)}
+                  onClick={() => setVehiculoDelete(vehiculo._id)}
                 >
                   Eliminar
                 </button>

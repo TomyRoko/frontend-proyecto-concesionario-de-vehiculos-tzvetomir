@@ -9,7 +9,7 @@ function VehiculosExclusivos({ vehiculos }) {
   return (
     <div className="vehiculos-exclusivos">
       {vehiculosExclusivos.map((vehiculo) => (
-        <VehiculoCard key={vehiculo.id} vehiculo={vehiculo} />
+        <VehiculoCard key={vehiculo._id} vehiculo={vehiculo} />
       ))}
     </div>
   );
