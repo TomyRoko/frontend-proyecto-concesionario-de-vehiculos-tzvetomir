@@ -56,7 +56,17 @@ const updateVehiculo = async (vehiculoID, vehiculoData) => {
   return response.json();
 };
 
-export { getVehiculos };
-export { getVehiculoById };
-export { createVehiculo };
-export { updateVehiculo };
+const deleteVehiculo = async (vehiculoID) => {
+  const response = await fetch(`${API_URL}/${vehiculoID}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Error al eliminar el vehículo");
+  }
+
+  return response.json();
+};
+
+export { getVehiculos, getVehiculoById, createVehiculo, updateVehiculo, deleteVehiculo };

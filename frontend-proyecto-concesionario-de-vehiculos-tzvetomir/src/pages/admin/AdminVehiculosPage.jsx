@@ -3,6 +3,7 @@ import VehiculoForm from "../../components/VehiculoForm.jsx";
 import { getVehiculos } from "../../services/vehiculoService.js";
 import { createVehiculo } from "../../services/vehiculoService.js";
 import { updateVehiculo } from "../../services/vehiculoService.js";
+import { deleteVehiculo } from "../../services/vehiculoService.js";
 
 function AdminVehiculosPage() {
   const [showForm, setShowForm] = useState(false);
@@ -43,17 +44,22 @@ function AdminVehiculosPage() {
     setMessage("Vehículo agregado correctamente.");
   };
 
-  const handleDeleteVehiculo = (id) => {
-    const filteredVehiculos = vehiculos.filter((vehiculo) => vehiculo._id != id);
-    setVehiculos(filteredVehiculos);
-    setMessage("Vehículo eliminado correctamente.");
-    setVehiculoDelete(null);
+  const handleDeleteVehiculo = async (vehiculoID) => {
+    try {
+      await deleteVehiculo(vehiculoID);
+      const filteredVehiculos = vehiculos.filter((vehiculo) => vehiculo._id !== vehiculoID);
+      setVehiculos(filteredVehiculos);
+      setVehiculoDelete(null);
+      setMessage("Vehículo eliminado correctamente.");
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   const handleUpdateVehiculo = async (vehiculoID, vehiculoData) => {
     const updatedVehiculo = await updateVehiculo(vehiculoID, vehiculoData);
     const updatedVehiculos = vehiculos.map((vehiculo) => {
-      if (vehiculo._id == vehiculoID) {
+      if (vehiculo._id === vehiculoID) {
         return updatedVehiculo;
       }
       return vehiculo;

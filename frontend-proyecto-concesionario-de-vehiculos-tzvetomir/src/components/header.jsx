@@ -2,9 +2,24 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import logo from "../assets/logo.png";
 import SearchBox from "./SearchBox";
-import vehiculos from "../data/vehiculos.js";
+import { useState, useEffect } from "react";
+import { getVehiculos } from "../services/vehiculoService.js";
 
 function Header() {
+  const [ vehiculos, setVehiculos] = useState([]);
+
+  useEffect(() => {
+    const loadVehiculos = async () => {
+      try {
+        const data = await getVehiculos();
+        setVehiculos(data);
+      } catch (error) {
+        console.error("Error al cargar los vehículos:", error);
+      }
+    };
+    loadVehiculos();
+  }, []);
+
   return (
     <header className="site-header">
       <div className="header-content container">
