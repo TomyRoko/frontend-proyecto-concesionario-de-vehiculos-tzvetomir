@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { login } from "../services/authSevices.js";
+import { useNavigate } from "react-router-dom";
 
 const initialForm = {
   email: "",
@@ -8,6 +9,8 @@ const initialForm = {
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function LoginPage() {
+const navigate = useNavigate();
+
   const [form, setForm] = useState(initialForm);
 
   const [message, setMessage] = useState("");
@@ -54,9 +57,12 @@ function LoginPage() {
 
       const data = await login(user);
 
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       setMessage(data.message || "Inicio de sesión exitoso.");
 
       setForm(initialForm);
+      navigate("/admin");
     } catch (error) {
       setError(
         error.message ||
