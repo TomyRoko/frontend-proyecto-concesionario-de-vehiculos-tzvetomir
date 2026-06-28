@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 
 const initialFormState = {
   categoria: "",
@@ -12,8 +13,10 @@ const initialFormState = {
   foto: "",
 };
 
-function VehiculoForm({ onCreateVehiculo }) {
+function VehiculoForm({ onCreateVehiculo, onUpdateVehiculo, vehiculo }) {
   const [form, setForm] = useState(initialFormState);
+
+  const isEditing = Boolean(vehiculo);
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -57,13 +60,26 @@ function VehiculoForm({ onCreateVehiculo }) {
       alert("Por favor, Ingrese una URL de foto.");
       return;
     }
-    onCreateVehiculo(form);
+    if (isEditing) {
+      onUpdateVehiculo(vehiculo.id, form);
+    } else {
+      onCreateVehiculo(form);
+    }
     setForm(initialFormState);
   };
 
+  useEffect(() => {
+    if (vehiculo) {
+      setForm({
+        ...initialFormState,
+        ...vehiculo,
+      });
+    }
+  }, [vehiculo]);
+
   return (
     <form className="vehiculo-form" onSubmit={handleSubmit}>
-      <h2>Agregar nuevo vehículo</h2>
+      <h2>{isEditing ? "Editar vehículo" : "Agregar nuevo vehículo"}</h2>
       <div className="form-group">
         <label htmlFor="categoria">Categoría:</label>
         <select
@@ -179,7 +195,9 @@ function VehiculoForm({ onCreateVehiculo }) {
           required
         />
       </div>
-      <button type="submit">Agregar vehículo</button>
+      <button type="submit">
+        {isEditing ? "Actualizar vehículo" : "Agregar vehículo"}
+      </button>
     </form>
   );
 }

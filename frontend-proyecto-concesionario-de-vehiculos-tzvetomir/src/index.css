@@ -230,6 +230,7 @@ footer a:focus-visible {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
+  justify-items: center;
   gap: 18px;
 }
 
@@ -237,6 +238,7 @@ footer a:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  width: min(1120px, 100%);
   padding: 12px;
   border: 1px solid #2a2a2a;
   border-radius: 18px;
@@ -280,17 +282,21 @@ footer a:focus-visible {
 }
 
 .hero-section h1 {
-  margin: 4px 0 2px;
-  max-width: 18ch;
+  margin: 8px auto 4px;
+  max-width: 24ch;
+  text-align: center;
   font-size: clamp(1.75rem, 4.6vw, 3.15rem);
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.02em;
   color: #f7f4ee;
+  text-wrap: balance;
+  text-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .hero-section p {
-  margin: 0;
-  max-width: 72ch;
+  margin: 0 auto;
+  max-width: 66ch;
+  text-align: center;
   color: #b6afa4;
   line-height: 1.65;
   font-size: clamp(0.95rem, 1.6vw, 1.06rem);
@@ -690,11 +696,27 @@ footer a:focus-visible {
 }
 
 .admin-vehiculos-page {
+  position: relative;
   margin-top: 8px;
   padding: 14px;
   border: 1px solid #2a2a2a;
   border-radius: 16px;
   background: rgba(14, 14, 14, 0.88);
+}
+
+.admin-vehiculos-message {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid #8d7545;
+  border-radius: 10px;
+  background: rgba(17, 17, 17, 0.95);
+  color: #efe4cf;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
 }
 
 .admin-vehiculos-header {
@@ -788,6 +810,99 @@ footer a:focus-visible {
   font-size: 0.9rem;
 }
 
+.admin-vehiculos-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.admin-vehiculos-edit-button,
+.admin-vehiculos-delete-button {
+  border: 1px solid #8d7545;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
+  color: #e7d7b8;
+  font-weight: 700;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.admin-vehiculos-edit-button:hover,
+.admin-vehiculos-delete-button:hover {
+  transform: translateY(-1px);
+  border-color: #a68d5a;
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(231, 215, 184, 0.2);
+}
+
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(3, 3, 3, 0.66);
+  backdrop-filter: blur(2px);
+}
+
+.admin-modal-content {
+  width: min(920px, calc(100vw - 32px));
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  border: 1px solid #2f2f2f;
+  border-radius: 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, #121212, #0c0c0c);
+}
+
+.admin-modal-close {
+  display: inline-flex;
+  margin-bottom: 12px;
+  border: 1px solid #8d7545;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
+  color: #e7d7b8;
+  font-weight: 700;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.admin-vehiculos-delete-confirmation {
+  width: min(420px, calc(100vw - 32px));
+  border: 1px solid #8d7545;
+  border-radius: 14px;
+  padding: 16px;
+  background: linear-gradient(180deg, #131313, #0d0d0d);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.admin-vehiculos-delete-confirmation p {
+  margin: 0 0 12px;
+  color: #ebe1ce;
+}
+
+.admin-vehiculos-confirmation-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-vehiculos-confirmation-actions button {
+  border: 1px solid #8d7545;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
+  color: #e7d7b8;
+  font-weight: 700;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
 .vehiculo-form {
   margin: 0 0 16px;
   padding: 14px;
@@ -849,6 +964,11 @@ footer a:focus-visible {
 
   .vehiculo-form {
     grid-template-columns: 1fr;
+  }
+
+  .admin-vehiculos-message {
+    width: calc(100vw - 24px);
+    max-width: 560px;
   }
 }
 
