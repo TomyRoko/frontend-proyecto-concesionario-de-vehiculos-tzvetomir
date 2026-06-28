@@ -16,12 +16,16 @@ const handleResponse = async (response) => {
 };
 
 const getVehiculos = async () => {
-  const response = await fetch(API_URL);
+  const response = await fetch(`${API_URL}?_=${Date.now()}`, {
+    cache: "no-store",
+  });
   return await handleResponse(response);
 };
 
 const getVehiculoById = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`);
+  const response = await fetch(`${API_URL}/${id}`, {
+    cache: "no-store",
+  });
   return await handleResponse(response);
 };
 
@@ -36,6 +40,7 @@ const createVehiculo = async (vehiculoData) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: token,
     },
     body: JSON.stringify(vehiculoData),
   });

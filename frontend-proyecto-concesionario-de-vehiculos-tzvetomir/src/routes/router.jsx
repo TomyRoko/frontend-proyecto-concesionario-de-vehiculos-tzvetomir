@@ -7,9 +7,9 @@ import VehiculoDetail from "../pages/VahiculoDetail";
 import NotFoundPage from "../pages/NotFoundPage";
 import RegisterPage from "../pages/RegisterPage";
 import AdminLayout from "../layouts/AdminLayout.jsx";
-import AdminVehiculosPage from "../pages/admin/AdminVehiculosPage.jsx";
 import DashboardPage from "../pages/admin/DaskboardPage.jsx";
 import LoginPage from "../pages/LoginPage.jsx";
+import UserVehiculosPage from "../pages/admin/UserVehiculosPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +58,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "vehiculos",
-        element: <AdminVehiculosPage />,
+        element: <UserVehiculosPage />,
       },
     ],
   },

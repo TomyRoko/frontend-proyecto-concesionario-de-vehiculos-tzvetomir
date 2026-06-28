@@ -15,6 +15,8 @@ function AdminVehiculosPage() {
   const [error, setError] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
 
+  const getVehiculoId = (vehiculo) => vehiculo._id || vehiculo.id;
+
   useEffect(() => {
     const loadVehiculos = async () => {
       try {
@@ -54,10 +56,10 @@ function AdminVehiculosPage() {
       setIsSaving(true);
       const newVehiculo = await createVehiculo(vehiculoData);
 
-  setVehiculos([...vehiculos, newVehiculo]);
-  setShowForm(false);
-  setSelectedVehiculo(null);
-  setMessage("Vehículo agregado correctamente.");
+      setVehiculos([...vehiculos, newVehiculo]);
+      setShowForm(false);
+      setSelectedVehiculo(null);
+      setMessage("Vehículo agregado correctamente.");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -65,13 +67,12 @@ function AdminVehiculosPage() {
     }
   };
 
-
   const handleDeleteVehiculo = async (vehiculoID) => {
     try {
       setIsSaving(true);
       await deleteVehiculo(vehiculoID);
       const filteredVehiculos = vehiculos.filter(
-        (vehiculo) => vehiculo._id !== vehiculoID,
+        (vehiculo) => getVehiculoId(vehiculo) !== vehiculoID,
       );
       setVehiculos(filteredVehiculos);
       setVehiculoDelete(null);
@@ -88,7 +89,7 @@ function AdminVehiculosPage() {
       setIsSaving(true);
       const updatedVehiculo = await updateVehiculo(vehiculoID, vehiculoData);
       const updatedVehiculos = vehiculos.map((vehiculo) => {
-        if (vehiculo._id === vehiculoID) {
+        if (getVehiculoId(vehiculo) === vehiculoID) {
           return updatedVehiculo;
         }
         return vehiculo;
@@ -127,7 +128,7 @@ function AdminVehiculosPage() {
 
       <div className="admin-vehiculos-list">
         {vehiculos.map((vehiculo) => (
-          <article key={vehiculo._id}>
+          <article key={getVehiculoId(vehiculo)}>
             <img src={vehiculo.foto} alt={vehiculo.marca} />
             <div className="admin-vehiculos-info">
               <h3>
@@ -154,9 +155,9 @@ function AdminVehiculosPage() {
                 <button
                   type="button"
                   className="admin-vehiculos-delete-button"
-                  onClick={() => setVehiculoDelete(vehiculo._id)}
+                  onClick={() => setVehiculoDelete(getVehiculoId(vehiculo))}
                 >
-                  {isSaving && vehiculoDelete === vehiculo._id
+                  {isSaving && vehiculoDelete === getVehiculoId(vehiculo)
                     ? "Eliminando..."
                     : "Eliminar"}
                 </button>
@@ -190,7 +191,7 @@ function AdminVehiculosPage() {
             </button>
             <div className="admin-vehiculos-form-container">
               <VehiculoForm
-                key={selectedVehiculo?._id ?? "new"}
+                key={selectedVehiculo?._id || selectedVehiculo?.id || "new"}
                 vehiculo={selectedVehiculo}
                 onCreateVehiculo={handleCreateVehiculo}
                 onUpdateVehiculo={handleUpdateVehiculo}
@@ -200,7 +201,6 @@ function AdminVehiculosPage() {
           </div>
         </div>
       )}
-
 
       {vehiculoDelete && (
         <div

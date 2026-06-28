@@ -17,8 +17,7 @@ function AdminLayout() {
           </div>
           <nav className="admin-nav">
             <ul>
-              <Link to="/admin/vehiculos">Vehículos</Link>
-              <Link to="/vehiculos">Ver los vehículos</Link>
+              <Link to="/admin/vehiculos">Ver los vehículos</Link>
             </ul>
           </nav>
           <div className="admin-content-wrap">
