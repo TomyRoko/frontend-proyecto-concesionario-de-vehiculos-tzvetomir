@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useEffect } from "react";
 
 const initialFormState = {
   categoria: "",
@@ -13,8 +12,13 @@ const initialFormState = {
   foto: "",
 };
 
-function VehiculoForm({ onCreateVehiculo, onUpdateVehiculo, vehiculo }) {
-  const [form, setForm] = useState(initialFormState);
+const getFormState = (vehiculo) => ({
+  ...initialFormState,
+  ...(vehiculo || {}),
+});
+
+function VehiculoForm({ onCreateVehiculo, onUpdateVehiculo, vehiculo, isSaving }) {
+  const [form, setForm] = useState(() => getFormState(vehiculo));
 
   const isEditing = Boolean(vehiculo);
 
@@ -26,7 +30,7 @@ function VehiculoForm({ onCreateVehiculo, onUpdateVehiculo, vehiculo }) {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!form.categoria.trim()) {
       alert("Por favor, Seleccione una categoría.");
@@ -60,22 +64,17 @@ function VehiculoForm({ onCreateVehiculo, onUpdateVehiculo, vehiculo }) {
       alert("Por favor, Ingrese una URL de foto.");
       return;
     }
-    if (isEditing) {
-      onUpdateVehiculo(vehiculo._id, form);
-    } else {
-      onCreateVehiculo(form);
+    try {
+      if (isEditing) {
+        await onUpdateVehiculo(vehiculo._id, form);
+      } else {
+        await onCreateVehiculo(form);
+      }
+      setForm(initialFormState);
+    } catch (error) {
+      alert(error.message || "No se pudo guardar el vehículo.");
     }
-    setForm(initialFormState);
   };
-
-  useEffect(() => {
-    if (vehiculo) {
-      setForm({
-        ...initialFormState,
-        ...vehiculo,
-      });
-    }
-  }, [vehiculo]);
 
   return (
     <form className="vehiculo-form" onSubmit={handleSubmit}>
@@ -195,8 +194,8 @@ function VehiculoForm({ onCreateVehiculo, onUpdateVehiculo, vehiculo }) {
           required
         />
       </div>
-      <button type="submit">
-        {isEditing ? "Actualizar vehículo" : "Agregar vehículo"}
+      <button type="submit" disabled={isSaving}>
+        {isSaving ? "Guardando..." : isEditing ? "Actualizar vehículo" : "Agregar vehículo"}
       </button>
     </form>
   );

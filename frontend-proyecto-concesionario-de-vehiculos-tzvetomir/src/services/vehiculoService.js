@@ -1,25 +1,22 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+
+const handleResponse = async (response) => {
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Error en la solicitud");
+  }
+  return data;
+};
+
 const getVehiculos = async () => {
   const response = await fetch(API_URL);
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Error al obtener los vehículos");
-  }
-
-  const data = await response.json();
-  return data;
+  return await handleResponse(response);
 };
 
 const getVehiculoById = async (id) => {
   const response = await fetch(`${API_URL}/${id}`);
-    if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Error al obtener el vehículo");
-  }
-  const data = await response.json();
-  return data;
+  return await handleResponse(response);
 }
 
 const createVehiculo = async (vehiculoData) => {
@@ -31,12 +28,7 @@ const createVehiculo = async (vehiculoData) => {
     body: JSON.stringify(vehiculoData),
   });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Error al crear el vehículo");
-  }
-
-  return response.json();
+  return await handleResponse(response);
 };
 
 const updateVehiculo = async (vehiculoID, vehiculoData) => {
@@ -48,12 +40,7 @@ const updateVehiculo = async (vehiculoID, vehiculoData) => {
     body: JSON.stringify(vehiculoData),
   });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Error al actualizar el vehículo");
-  }
-
-  return response.json();
+  return await handleResponse(response);
 };
 
 const deleteVehiculo = async (vehiculoID) => {
@@ -61,12 +48,7 @@ const deleteVehiculo = async (vehiculoID) => {
     method: "DELETE",
   });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Error al eliminar el vehículo");
-  }
-
-  return response.json();
+  return await handleResponse(response);
 };
 
 export { getVehiculos, getVehiculoById, createVehiculo, updateVehiculo, deleteVehiculo };

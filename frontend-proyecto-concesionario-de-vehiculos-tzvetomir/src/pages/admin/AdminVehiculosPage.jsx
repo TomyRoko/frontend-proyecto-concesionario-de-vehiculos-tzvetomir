@@ -13,7 +13,8 @@ function AdminVehiculosPage() {
   const [vehiculoDelete, setVehiculoDelete] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+  const [isSaving, setIsSaving] = useState(false);
+
   useEffect(() => {
     const loadVehiculos = async () => {
       try {
@@ -28,6 +29,18 @@ function AdminVehiculosPage() {
     loadVehiculos();
   }, []);
 
+  useEffect(() => {
+    if (!message) {
+      return undefined;
+    }
+
+    const timeoutId = setTimeout(() => {
+      setMessage("");
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, [message]);
+
   if (loading) {
     return <p className="loading">Cargando vehículos...</p>;
   }
@@ -37,37 +50,58 @@ function AdminVehiculosPage() {
   }
 
   const handleCreateVehiculo = async (vehiculoData) => {
-    const newVehiculo = await createVehiculo(vehiculoData);
+    try {
+      setIsSaving(true);
+      const newVehiculo = await createVehiculo(vehiculoData);
 
-    setVehiculos([...vehiculos, newVehiculo]);
-    setShowForm(false);
-    setMessage("Vehículo agregado correctamente.");
+  setVehiculos([...vehiculos, newVehiculo]);
+  setShowForm(false);
+  setSelectedVehiculo(null);
+  setMessage("Vehículo agregado correctamente.");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsSaving(false);
+    }
   };
+
 
   const handleDeleteVehiculo = async (vehiculoID) => {
     try {
+      setIsSaving(true);
       await deleteVehiculo(vehiculoID);
-      const filteredVehiculos = vehiculos.filter((vehiculo) => vehiculo._id !== vehiculoID);
+      const filteredVehiculos = vehiculos.filter(
+        (vehiculo) => vehiculo._id !== vehiculoID,
+      );
       setVehiculos(filteredVehiculos);
       setVehiculoDelete(null);
       setMessage("Vehículo eliminado correctamente.");
     } catch (error) {
       setError(error.message);
+    } finally {
+      setIsSaving(false);
     }
   };
 
   const handleUpdateVehiculo = async (vehiculoID, vehiculoData) => {
-    const updatedVehiculo = await updateVehiculo(vehiculoID, vehiculoData);
-    const updatedVehiculos = vehiculos.map((vehiculo) => {
-      if (vehiculo._id === vehiculoID) {
-        return updatedVehiculo;
-      }
-      return vehiculo;
-    });
-    setVehiculos(updatedVehiculos);
-    setSelectedVehiculo(null);
-    setShowForm(false);
-    setMessage("Vehículo actualizado correctamente.");
+    try {
+      setIsSaving(true);
+      const updatedVehiculo = await updateVehiculo(vehiculoID, vehiculoData);
+      const updatedVehiculos = vehiculos.map((vehiculo) => {
+        if (vehiculo._id === vehiculoID) {
+          return updatedVehiculo;
+        }
+        return vehiculo;
+      });
+      setVehiculos(updatedVehiculos);
+      setSelectedVehiculo(null);
+      setShowForm(false);
+      setMessage("Vehículo actualizado correctamente.");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -122,7 +156,9 @@ function AdminVehiculosPage() {
                   className="admin-vehiculos-delete-button"
                   onClick={() => setVehiculoDelete(vehiculo._id)}
                 >
-                  Eliminar
+                  {isSaving && vehiculoDelete === vehiculo._id
+                    ? "Eliminando..."
+                    : "Eliminar"}
                 </button>
               </div>
             </div>
@@ -152,14 +188,19 @@ function AdminVehiculosPage() {
             >
               Cerrar
             </button>
-            <VehiculoForm
-              vehiculo={selectedVehiculo}
-              onCreateVehiculo={handleCreateVehiculo}
-              onUpdateVehiculo={handleUpdateVehiculo}
-            />
+            <div className="admin-vehiculos-form-container">
+              <VehiculoForm
+                key={selectedVehiculo?._id ?? "new"}
+                vehiculo={selectedVehiculo}
+                onCreateVehiculo={handleCreateVehiculo}
+                onUpdateVehiculo={handleUpdateVehiculo}
+                isSaving={isSaving}
+              />
+            </div>
           </div>
         </div>
       )}
+
 
       {vehiculoDelete && (
         <div
@@ -182,7 +223,7 @@ function AdminVehiculosPage() {
                 Sí, eliminar
               </button>
               <button type="button" onClick={() => setVehiculoDelete(null)}>
-                Cancelar
+                {isSaving ? "Eliminando..." : "Cancelar"}
               </button>
             </div>
           </div>
