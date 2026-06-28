@@ -6,11 +6,14 @@ function AdminLayout() {
   return (
     <>
       <Header />
-      <main>
+      <main className="admin-main">
         <div className="admin-layout">
           <div className="admin-sidebar">
             <h1>Panel de Administración</h1>
-            <p>Bienvenido al panel de administración. Aquí puedes gestionar los vehículos y otras configuraciones del concesionario.</p>
+            <p>
+              Bienvenido al panel de administración. Aquí puedes gestionar los
+              vehículos y otras configuraciones del concesionario.
+            </p>
           </div>
           <nav className="admin-nav">
             <ul>
@@ -18,7 +21,9 @@ function AdminLayout() {
               <Link to="/vehiculos">Ver los vehículos</Link>
             </ul>
           </nav>
-          <Outlet />
+          <div className="admin-content-wrap">
+            <Outlet />
+          </div>
         </div>
       </main>
       <Footer />

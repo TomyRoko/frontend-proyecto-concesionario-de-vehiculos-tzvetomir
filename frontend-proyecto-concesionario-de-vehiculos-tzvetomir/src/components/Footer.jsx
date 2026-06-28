@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 function Footer() {
   const Fecha = new Date().getFullYear();
 
-  return (    
+  return (
     <footer className="site-footer">
       <div className="footer-grid">
         <section className="footer-block">
           <h3>Concesionario Elite Motors</h3>
           <p>
-            Vehiculos premium seleccionados, asesoramiento personalizado y
-            financiacion adaptada para cada cliente.
+            En Elite Motors te acompanamos de principio a fin para que
+            encuentres el vehiculo ideal. Trabajamos con modelos revisados,
+            atencion personalizada y opciones de financiacion pensadas para tu
+            presupuesto.
           </p>
         </section>
 
@@ -41,8 +43,7 @@ function Footer() {
 
       <div className="footer-bottom">
         <p>
-          © {Fecha} Concesionario de Vehiculos. Todos los derechos
-          reservados.
+          © {Fecha} Concesionario de Vehiculos. Todos los derechos reservados.
         </p>
         <div className="footer-legal-links">
           <a href="#">Privacidad</a>

@@ -74,30 +74,31 @@ a {
 
 .header-search input[type="search"] {
   width: 100%;
-  height: 33px;
-  border: 1px solid #31363c;
+  height: 36px;
+  border: 1px solid #5e4d2e;
   border-radius: 999px;
-  padding: 0 10px;
-  background: linear-gradient(180deg, #20252a, #171b1f);
-  color: #f6f8fa;
+  padding: 0 12px;
+  background: linear-gradient(180deg, #171717, #0f0f0f);
+  color: #efe4cf;
   font-size: 12px;
   outline: none;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.38);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .header-search input[type="search"]::placeholder {
-  color: #9da6b1;
+  color: #b6aa95;
 }
 
 .header-search input[type="search"]:focus {
-  border-color: #68c1ff;
+  border-color: #9a8352;
   box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.45),
-    0 0 0 3px rgba(104, 193, 255, 0.22);
+    0 12px 28px rgba(0, 0, 0, 0.46),
+    0 0 0 3px rgba(154, 131, 82, 0.24);
   transform: translateY(-1px);
 }
 
@@ -106,10 +107,10 @@ a {
   top: calc(100% + 5px);
   right: 0;
   width: 100%;
-  border: 1px solid #2b3035;
-  border-radius: 10px;
-  background-color: #14181c;
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.48);
+  border: 1px solid #4f4027;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #131313, #0c0c0c);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   z-index: 50;
 }
@@ -119,9 +120,11 @@ a {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  padding: 8px 10px;
-  border-bottom: 1px solid #23282d;
-  transition: background-color 0.18s ease;
+  padding: 9px 10px;
+  border-bottom: 1px solid #2a2419;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
 }
 
 .search-button:last-child {
@@ -129,23 +132,23 @@ a {
 }
 
 .search-button:hover {
-  background-color: #1d2329;
+  background-color: #1b1b1b;
 }
 
 .search-button strong {
-  color: #f2f5f7;
+  color: #efe4cf;
   font-size: 12px;
 }
 
 .search-button span {
-  color: #bec7d1;
+  color: #c8bca9;
   font-size: 10px;
 }
 
 .no-results {
   margin: 0;
   padding: 8px 10px;
-  color: #bec7d1;
+  color: #c8bca9;
   font-size: 11px;
 }
 
@@ -429,6 +432,10 @@ footer a:focus-visible {
 .catalogo-page {
   min-height: calc(100vh - 120px);
   padding: 26px 18px 34px;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 10px;
   background:
     radial-gradient(circle at 8% 0%, rgba(174, 139, 81, 0.13), transparent 38%),
     radial-gradient(
@@ -440,15 +447,22 @@ footer a:focus-visible {
 }
 
 .catalogo-page h1 {
-  margin: 0 0 10px;
+  margin: 2px 0 8px;
+  max-width: 24ch;
+  text-align: center;
   font-size: clamp(1.65rem, 4.2vw, 2.6rem);
   letter-spacing: -0.02em;
+  line-height: 1.08;
+  text-wrap: balance;
   color: #f4efe5;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.38);
 }
 
 .catalogo-page > p {
-  margin: 0 0 18px;
-  max-width: 72ch;
+  margin: 0 0 14px;
+  max-width: 80ch;
+  text-align: center;
+  text-wrap: balance;
   line-height: 1.62;
   color: #b6afa4;
 }
@@ -456,6 +470,7 @@ footer a:focus-visible {
 .vehiculo-filters {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr 0.8fr;
+  width: min(1080px, 100%);
   gap: 12px;
   align-items: end;
   margin-bottom: 18px;
@@ -463,6 +478,7 @@ footer a:focus-visible {
   border: 1px solid #2b2b2b;
   border-radius: 14px;
   background: rgba(16, 16, 16, 0.9);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.3);
 }
 
 .vehiculo-filters label {
@@ -494,8 +510,13 @@ footer a:focus-visible {
 }
 
 .catalogo-page .vehiculos-catalogo {
-  width: 100%;
+  width: min(1120px, 100%);
   padding: 0;
+}
+
+.catalogo-page .vehiculos-catalogo > p {
+  text-align: center;
+  color: #e9dfcd;
 }
 
 .catalogo-page .vehiculos-list {
@@ -657,17 +678,28 @@ footer a:focus-visible {
   }
 }
 
+.admin-main {
+  padding-top: clamp(12px, 2.5vw, 24px);
+  padding-inline: clamp(10px, 2vw, 20px);
+}
+
 .admin-layout {
+  width: min(1180px, 100%);
+  margin: 0 auto;
   padding: 26px 18px 22px;
   background:
     radial-gradient(circle at 8% 0%, rgba(166, 131, 75, 0.13), transparent 40%),
     radial-gradient(circle at 92% 10%, rgba(99, 99, 99, 0.12), transparent 44%),
     linear-gradient(180deg, #070707 0%, #040404 100%);
+  border: 1px solid #1f1f1f;
+  border-radius: 18px;
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.35);
 }
 
 .admin-sidebar {
-  margin-bottom: 14px;
-  max-width: 80ch;
+  margin: 0 auto 16px;
+  max-width: 84ch;
+  text-align: center;
 }
 
 .admin-sidebar h1 {
@@ -688,11 +720,17 @@ footer a:focus-visible {
 
 .admin-nav ul {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.admin-content-wrap {
+  width: min(1120px, 100%);
+  margin: 0 auto;
 }
 
 .admin-vehiculos-page {
@@ -702,6 +740,34 @@ footer a:focus-visible {
   border: 1px solid #2a2a2a;
   border-radius: 16px;
   background: rgba(14, 14, 14, 0.88);
+}
+
+.admin-dashboard-page {
+  margin-top: 8px;
+  min-height: 220px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: clamp(24px, 5vw, 46px);
+  background:
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(166, 131, 75, 0.2),
+      transparent 55%
+    ),
+    linear-gradient(180deg, rgba(18, 18, 18, 0.9), rgba(10, 10, 10, 0.9));
+  text-align: center;
+}
+
+.admin-dashboard-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4.6vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  color: #f4ece0;
+  text-transform: uppercase;
+  text-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
 }
 
 .admin-vehiculos-message {
