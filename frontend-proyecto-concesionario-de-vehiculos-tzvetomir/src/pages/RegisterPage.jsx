@@ -9,6 +9,8 @@ const initialForm = {
   password_confirmation: "",
 };
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function RegisterPage() {
   const [form, setForm] = useState(initialForm);
 
@@ -34,6 +36,10 @@ function RegisterPage() {
       }
       if (form.email !== form.email_confirmation) {
         setError("Los correos electrónicos no coinciden.");
+        return;
+      }
+      if (!emailRegex.test(form.email)) {
+        setError("Por favor, ingrese un correo electrónico válido.");
         return;
       }
       const userData = {

@@ -9,6 +9,7 @@ import RegisterPage from "../pages/RegisterPage";
 import AdminLayout from "../layouts/AdminLayout.jsx";
 import AdminVehiculosPage from "../pages/admin/AdminVehiculosPage.jsx";
 import DashboardPage from "../pages/admin/DaskboardPage.jsx";
+import LoginPage from "../pages/LoginPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
     ],
   },
