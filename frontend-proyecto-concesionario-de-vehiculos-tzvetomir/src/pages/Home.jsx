@@ -1,9 +1,36 @@
 import VehiculosExclusivos from "../components/VehiculosExclusivos.jsx";
-import  vehiculos  from "../data/vehiculos.js";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getVehiculos } from "../services/vehiculoService.js";
 
 function Home() {
   const navigate = useNavigate();
+  const [vehiculos, setVehiculos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadVehiculos = async () => {
+      try {
+        const data = await getVehiculos();
+        setVehiculos(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadVehiculos();
+  }, []);
+
+  if (loading) {
+    return <p className="loading">Cargando vehículos...</p>;
+  }
+
+  if (error) {
+    return <p className="error">{error}</p>;
+  }
+
   return (
     <main>
       <section className="hero-section">

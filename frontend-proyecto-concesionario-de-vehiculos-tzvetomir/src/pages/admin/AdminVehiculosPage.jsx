@@ -1,25 +1,38 @@
-import initialProducts from "../../data/vehiculos.js";
 import { useEffect, useState } from "react";
 import VehiculoForm from "../../components/VehiculoForm.jsx";
+import { getVehiculos } from "../../services/vehiculoService.js";
+
 
 function AdminVehiculosPage() {
   const [showForm, setShowForm] = useState(false);
-  const [vehiculos, setVehiculos] = useState(initialProducts);
+  const [vehiculos, setVehiculos] = useState([]);
   const [selectedVehiculo, setSelectedVehiculo] = useState(null);
   const [message, setMessage] = useState("");
   const [vehiculoDelete, setVehiculoDelete] = useState(null);
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
   useEffect(() => {
-    if (!message) {
-      return;
-    }
+    const loadVehiculos = async () => {
+      try {
+        const data = await getVehiculos();
+        setVehiculos(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadVehiculos();
+  }, []);
 
-    const timerId = setTimeout(() => {
-      setMessage("");
-    }, 3000);
+  if (loading) {
+    return <p className="loading">Cargando vehículos...</p>;
+  }
 
-    return () => clearTimeout(timerId);
-  }, [message]);
+  if (error) {
+    return <p className="error">{error}</p>;
+  }
 
   const handleCreateVehiculo = (vehiculoData) => {
     const newVehiculo = {
